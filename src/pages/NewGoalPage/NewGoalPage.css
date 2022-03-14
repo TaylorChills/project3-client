@@ -1,0 +1,8 @@
+.new-goal{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+.goals{
+    margin-top: 10rem;
+}
