@@ -34,11 +34,15 @@ function LoginPage() {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Username</label>  <br />
         <input type="text" name="username" value={username} onChange={handleUsername} />
 
-        <label htmlFor="password">Password</label>
+        <br />
+
+        <label htmlFor="password">Password</label>  <br />
         <input type="password" name="password" value={password} onChange={handlePassword} />
+
+        <br />
 
         <button type="submit"> Login</button>
       </form>

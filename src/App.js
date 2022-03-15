@@ -5,6 +5,8 @@ import UserPage from './pages/UserPage/UserPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import NewGoalPage from './pages/NewGoalPage/NewGoalPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import GoalDetails from './pages/GoalDetailPage/GoalDetailPage';
+import EditGoalPage from './pages/EditGoalPage/EditGoalPage';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='/signup' element={<SignupPage/>}/>
         <Route path='/home' element={<UserPage/>}/>
         <Route path='/new-goal' element={<NewGoalPage/>}/>
+        <Route path='/goal/:goalId' element={<GoalDetails/>}/>
+        <Route path='/goal/edit/:goalId' element={<EditGoalPage/>} />
       </Routes>
 
     </div>

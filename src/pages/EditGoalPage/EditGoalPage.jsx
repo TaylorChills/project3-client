@@ -1,17 +1,19 @@
 import '../NewGoalPage/NewGoalPage.css'
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
 
-function NewGoalPage(props) {
+function EditGoalPage(props) {
     const[name, setName] = useState('')
     const[description, setDescription] = useState('')
     const[type, setType] = useState('')
     const[frequency, setFrequency] = useState('')
     const[streak, setStreak] = useState('')
 
+    const navigate = useNavigate();
+    const { goalId } = useParams();
 
     const handleName = (e) => setName(e.target.value)
     const handleDescription = (e) => setDescription(e.target.value)
@@ -19,19 +21,26 @@ function NewGoalPage(props) {
     const handleFrequency = (e) => setFrequency(e.target.value)
     const handleStreak = (e) => setStreak(e.target.value)
 
+
+    const deleteGoal = () => {
+        axios
+          .delete(`${process.env.REACT_APP_API_URL}/goals/${goalId}`)
+          .then(() => navigate('/home'))
+      }
+
     
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const storedToken = localStorage.getItem("authToken");
+
         const body = { name, description, type, frequency, streak }
 
         axios
-        .post(`${process.env.REACT_APP_API_URL}/goals`, body, { headers: { Authorization: `Bearer ${storedToken}` }})
+        .put(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, body )
         .then((response) => {
           setName('')
           setDescription('')
-          props.refreshGoals()
+          navigate(`/goals/${goalId}`)
         })
         .catch((err) => console.log(err))
     }
@@ -39,7 +48,9 @@ function NewGoalPage(props) {
   return (
     <div>
 
-    <h1>New Goal</h1>
+    <h1>Edit Goal</h1>
+
+    
 
       <form onSubmit={handleSubmit} id="goal-form">
         <div className='new-goal'>
@@ -102,10 +113,11 @@ function NewGoalPage(props) {
           </div>
 
         </div>  
-        <button type='submit'>Add Goal!</button>   
+        <button type='submit'>Confirm Changes</button>   
       </form>
+      <button onClick={deleteGoal}>Delete Goal</button>
     </div>
   )
 }
 
-export default NewGoalPage
+export default EditGoalPage

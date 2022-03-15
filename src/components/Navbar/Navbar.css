@@ -28,6 +28,7 @@ a {
 }
 .nav__brand {
   text-transform: uppercase;
+  color: white;
 }
 
 .nav__menu {

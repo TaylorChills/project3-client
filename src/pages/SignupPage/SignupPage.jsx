@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_URL = "http://localhost:5005";
-
 function SignupPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,24 +28,28 @@ function SignupPage() {
       <h1>Sign Up</h1>
  
       <form onSubmit={handleSubmit}>
-      <label>Username:</label>
+      <label>Username:</label>    <br />
         <input 
           type="text"
           name="name"
           value={username}
           onChange={handleUsername}
         />
+        <br />
  
-        <label>Password:</label>
+        <label>Password:</label>    <br />
         <input 
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
         />
- 
+        <br />
+
         <button type="submit">Sign Up</button>
       </form>
+
+      <br />
  
       <p>Already have account?</p>
       <Link to={"/login"}> Login</Link>
