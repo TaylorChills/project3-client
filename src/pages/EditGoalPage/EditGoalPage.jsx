@@ -1,5 +1,5 @@
 import '../NewGoalPage/NewGoalPage.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,12 +21,31 @@ function EditGoalPage(props) {
     const handleFrequency = (e) => setFrequency(e.target.value)
     const handleStreak = (e) => setStreak(e.target.value)
 
+    const storedToken = localStorage.getItem("authToken");
+
 
     const deleteGoal = () => {
         axios
-          .delete(`${process.env.REACT_APP_API_URL}/goals/${goalId}`)
+          .delete(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, { headers: { Authorization: `Bearer ${storedToken}` }})
           .then(() => navigate('/home'))
       }
+
+      const fetchGoals = async () => {
+        try {
+          let response = await axios.get(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, { headers: { Authorization: `Bearer ${storedToken}` }});
+          let { name, description, type, frequency } = response.data;
+          setName(name);
+          setDescription(description);
+          setType(type)
+          setFrequency(frequency)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      useEffect(() => {
+        fetchGoals();
+      }, []);
 
     
 
@@ -36,7 +55,7 @@ function EditGoalPage(props) {
         const body = { name, description, type, frequency, streak }
 
         axios
-        .put(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, body )
+        .put(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, body, { headers: { Authorization: `Bearer ${storedToken}` }} )
         .then((response) => {
           setName('')
           setDescription('')
