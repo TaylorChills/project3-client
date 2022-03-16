@@ -2,6 +2,7 @@ import '../NewGoalPage/NewGoalPage.css'
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../NewGoalPage/NewGoalPage.css'
 
 
 
@@ -59,13 +60,13 @@ function EditGoalPage(props) {
         .then((response) => {
           setName('')
           setDescription('')
-          navigate(`/goals/${goalId}`)
+          navigate(`/home`)
         })
         .catch((err) => console.log(err))
     }
 
   return (
-    <div>
+    <div className='form'>
 
     <h1>Edit Goal</h1>
 
@@ -81,6 +82,7 @@ function EditGoalPage(props) {
                 name="name"
                 value={name}
                 onChange={handleName}
+                className="un"
               />
           </div>
 
@@ -91,6 +93,7 @@ function EditGoalPage(props) {
                 value={description}
                 onChange={handleDescription}
                 form="goal-form"
+                className='un'
                 cols={20}
                 rows={5}
               >
@@ -98,17 +101,21 @@ function EditGoalPage(props) {
               </textarea>
           </div>
 
-          <div className='goals' onChange={handleType}>
-            <label>Goal Type:</label> <br />
+          <div className='goals-radio' onChange={handleType}>
+            
 
-              <input type="radio" id="daily" value='Daily'  name="type"/>
-              <label htmlFor="daily">Daily</label>  <br />
-
-              <input type="radio" id="weekly" value='Weekly' name="type"/>
-              <label htmlFor="weekly">Weekly</label>  <br />
-
-              <input type="radio" id="monthly" value='Monthly'  name="type"/>
-              <label htmlFor="monthly">Monthly</label>
+              <div>
+                <input type="radio" id="daily" value='Daily'  name="type"/>
+                <label htmlFor="daily">Daily</label>
+              </div>  
+              <div>
+                <input type="radio" id="weekly" value='Weekly' name="type"/>
+                <label htmlFor="weekly">Weekly</label>
+              </div>
+              <div>
+                <input type="radio" id="monthly" value='Monthly'  name="type"/>
+                <label htmlFor="monthly">Monthly</label>
+              </div>
           </div>
 
           <div className='goals'>
@@ -119,6 +126,7 @@ function EditGoalPage(props) {
                 name="weekly"
                 value={frequency}
                 onChange={handleFrequency}
+                className="often"
               /> / 7 times a week
 
               <br />
@@ -128,13 +136,14 @@ function EditGoalPage(props) {
                 name="monthly"
                 value={frequency}
                 onChange={handleFrequency}
+                className="often"
               /> / 20 times a month
           </div>
 
         </div>  
-        <button type='submit'>Confirm Changes</button>   
+        <button type='submit'  className='submit'>Confirm Changes</button>   
       </form>
-      <button onClick={deleteGoal}>Delete Goal</button>
+      <button onClick={deleteGoal}  className='submit'>Delete Goal</button>
     </div>
   )
 }

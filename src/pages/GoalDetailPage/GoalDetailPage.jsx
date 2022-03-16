@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Calendar from 'react-calendar'
-import DatePicker from 'react-datepicker'
+
 import 'react-datepicker/dist/react-datepicker.css'
 /* import DatePicker from "react-multi-date-picker" */
+import { Calendar, DateObject } from "react-multi-date-picker"
+import DatePanel from "react-multi-date-picker/plugins/date_panel" 
+import Toolbar from "react-multi-date-picker/plugins/toolbar"
+import colors from "react-multi-date-picker/plugins/colors"
 
 
 function GoalDetails() {
@@ -31,9 +34,6 @@ function GoalDetails() {
     //Calendar stuff
     /* const[dates, setDates] = useState(new Date()) */
 
-    const currentDate = new Date()
-    const maxDate = new Date(currentDate + 1)
-
     const [dates, setDates] = useState()
 
 
@@ -52,39 +52,20 @@ function GoalDetails() {
 
 
     }
-    const Change = date => {
-        setDates(date)
-        console.log(date)
+   
+    const click = (e) => {
+        e.preventDefault()
+        console.log(e.target.value)
+
     }
-
-    /* class StackOverflow extends React.Component {
-        constructor(){
-          super();
-          this.state={
-            selectedDate:moment(),
-          }
-        }
-        onSelect=(e)=>{
-          this.setState({selectedDate:e})
-        }
-    } */
-
-
-
-
-    /* onClick={goalUpdate}
-        selectRange
-    
-    */
 
 
     const [selectedDate, setSelectedDate] = useState(null)
 
-    const [value, setValue] = useState(null)
 
-    function handleChange(value){
-        console.log(value)
-        setValue(value)
+    function handleChange(e){
+        console.log(e.target.value)
+        setDates(dates)
       }
 
   return (
@@ -98,27 +79,20 @@ function GoalDetails() {
             <h1>{goal.name}</h1>
             <div className='calendar'>
 
-            {/* <form onSubmit={completionSubmit}>
+            <form onSubmit={completionSubmit}>
+
                 <Calendar 
-                showWeekNumbers 
-                maxDate={maxDate}
-                
-                onChange={Change} value={dates}
+                value={dates}
+                onChange={e => setDates(e.target.value)}
+                multiple
+                maxDate={new Date()}
+                format="MM/DD/YYYY"
+                    plugins={[
+                    <DatePanel sort="date" />]}
                 />
-
-                <DatePicker 
-                selected={selectedDate} 
-                onChange={date => setSelectedDate(date)}/>
-
-                <DatePicker 
-                value={value}
-                onChange={handleChange}
-                />
-
-
                 
                 <button type='submit'>Make Changes</button>
-            </form> */}
+            </form>
 
             </div>
             <p>{goal.description}</p>
