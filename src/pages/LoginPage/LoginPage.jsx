@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/auth.context';
+import '../SignupPage/AuthForms.css'
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -31,20 +32,31 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>  <br />
-        <input type="text" name="username" value={username} onChange={handleUsername} />
+    <div className="main">
+      <p class="sign" align="center">Login</p>
+      <form onSubmit={handleSubmit} className="form1">
+        <input 
+        type="text" 
+        name="username" 
+        value={username} 
+        onChange={handleUsername} 
+        className="un"
+        placeholder="Username"
+        />
 
-        <br />
+        <input 
+        type="password"
+        name="password" 
+        value={password} 
+        onChange={handlePassword} 
+        className="pass"
+        placeholder="Password"
+        />
 
-        <label htmlFor="password">Password</label>  <br />
-        <input type="password" name="password" value={password} onChange={handlePassword} />
-
-        <br />
-
-        <button type="submit"> Login</button>
+        <button 
+        type="submit"
+        className="submit" 
+        >Login</button>
       </form>
     </div>
   );

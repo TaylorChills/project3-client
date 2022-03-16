@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../SignupPage/AuthForms.css'
 
 function SignupPage() {
   const [username, setUsername] = useState('');
@@ -24,33 +25,37 @@ function SignupPage() {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className='main'>
+      <p class="sign" align="center">Sign in</p>
  
-      <form onSubmit={handleSubmit}>
-      <label>Username:</label>    <br />
+      <form onSubmit={handleSubmit} className="form1">
+
         <input 
           type="text"
           name="name"
           value={username}
           onChange={handleUsername}
+          className="un"
+          placeholder='Username'
+          
         />
-        <br />
- 
-        <label>Password:</label>    <br />
+        
         <input 
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
+          className="pass"
+          placeholder="Password"
         />
-        <br />
 
-        <button type="submit">Sign Up</button>
+        <button 
+        type="submit" 
+        className="submit" 
+        >Sign Up</button>
+
       </form>
 
-      <br />
- 
       <p>Already have account?</p>
       <Link to={"/login"}> Login</Link>
     </div>

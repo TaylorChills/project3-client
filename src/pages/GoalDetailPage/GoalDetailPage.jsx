@@ -57,7 +57,7 @@ function GoalDetails() {
         console.log(date)
     }
 
-    class StackOverflow extends React.Component {
+    /* class StackOverflow extends React.Component {
         constructor(){
           super();
           this.state={
@@ -67,7 +67,7 @@ function GoalDetails() {
         onSelect=(e)=>{
           this.setState({selectedDate:e})
         }
-    }
+    } */
 
 
 
