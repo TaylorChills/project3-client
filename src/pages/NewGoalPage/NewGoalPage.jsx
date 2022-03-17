@@ -12,6 +12,8 @@ function NewGoalPage(props) {
     const[frequency, setFrequency] = useState('')
     const[streak, setStreak] = useState('')
 
+    const navigate = useNavigate()
+
 
     const handleName = (e) => setName(e.target.value)
     const handleDescription = (e) => setDescription(e.target.value)
@@ -31,7 +33,7 @@ function NewGoalPage(props) {
         .then((response) => {
           setName('')
           setDescription('')
-          props.refreshGoals()
+          navigate(`/home`)
         })
         .catch((err) => console.log(err))
     }
@@ -52,11 +54,15 @@ function NewGoalPage(props) {
   return (
     <div className='form'>
 
-    <h1>New Goal</h1>
-
+    
+      <h1 className='goal-title'>New Goal</h1>
+    <div className='trash-css'>  
+      <Link to={"/home"} className="back">back</Link>
+    </div>
+    
       <form onSubmit={handleSubmit} id="goal-form">
         <div className='new-goal'>
-          <Link to={"/home"}>back</Link>
+          
           <div className='goals'>
               <input 
                 type="text"
