@@ -53,7 +53,7 @@ function UserPage() {
       {/* Display users name here */}
       <h1>Home Page</h1>
 
-      <Link to={"/new-goal"}>Add new Goal</Link>
+      {/* <Link to={"/new-goal"} className="submit">Add new Goal</Link> */}
       {/* User profile pic */}
 
       {/* Inspirational Quotes */}
@@ -67,25 +67,23 @@ function UserPage() {
       )}
 
       {/* User goals will be displayed here */}
-
       <div className="container">
         {goals.map((goal) => {
           return (
             <>
-            <Link to={`/goal/${goal._id}`}>
-              <div className="card">
-                <div>
-                  <h3>{goal.name}</h3>
-                  <p>{goal.description}</p>
-                </div>
-                <div>
-                <p>{goal.type} {goal.frequency}</p>
-                
-                <p>{goal.streak}</p>
-                </div>
+              <Link to={`/goal/${goal._id}`}>
+                <div className="card">
 
-                
-              </div>
+                  <div>
+                    <h3>{goal.name}</h3>
+                    <p>{goal.description}</p>
+                  </div>
+
+                  <div className="goal-type">
+                    <p>Type: {goal.type} {goal.frequency}</p>
+                    <p>Streak: {goal.streak}</p>
+                  </div>
+                </div>
               </Link>
             </>
           );

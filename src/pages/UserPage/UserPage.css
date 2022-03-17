@@ -1,5 +1,7 @@
   
-  
+  .goal-type{
+    min-width: 9rem;
+  }
   
   .container {
     display: flex;
@@ -7,8 +9,6 @@
     justify-content: center;
     padding: 1em 0;
     text-align: left;
-    
-    
   }
   
   .card {
@@ -41,14 +41,6 @@
     border-radius: .3em;
     box-shadow: rgba(0, 0, 0, 0.2) 3px 6px 10px;
     border: solid 1px #ccc;
-  }
-  
-  .card h3 {
-    
-  }
-  
-  .content p {
-   
   }
   
   @media (max-width: 820px) {

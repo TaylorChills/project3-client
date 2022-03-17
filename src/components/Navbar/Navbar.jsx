@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/auth.context';
 
 function Navbar() {
 
-  const { loggedIn, user, logoutUser } = useContext(AuthContext);
+  const { loggedIn, logoutUser } = useContext(AuthContext);
 
   const [active, setActive] = useState("nav__menu");
   const [icon, setIcon] = useState("nav__toggler");
@@ -23,41 +23,34 @@ function Navbar() {
     } else setIcon("nav__toggler");
   };
 
-
-  
   return (
     <nav className="nav">
-      {/* <a href="#" className="nav__brand">
-        Better Me
-      </a> */}
-
       <h1 className="nav__brand">Better Me</h1>
-
 
       <ul className={active}>
         {loggedIn && (
           <>
             <li>
-              <Link to="/home" className="nav__item">Home Page</Link>
+              <Link to="/home" className="nav__item" onClick={navToggle}>Home Page</Link>
             </li>
 
             <li>
-              <Link to="/new-goal" className="nav__item">New goal</Link>
+              <Link to="/new-goal" className="nav__item" onClick={navToggle}>New goal</Link>
             </li>
 
             <li>
-              <button onClick={logoutUser} className="nav__button">Logout</button>
+              <button onClick={logoutUser} className="nav__button" >Logout</button>
             </li>
           </>
         )}
         {!loggedIn && (
           <>
             <li>
-              <Link to="/signup" className="nav__item">Sign Up</Link>
+              <Link to="/signup" className="nav__item" onClick={navToggle}>Sign Up</Link>
             </li>
 
             <li>
-              <Link to="/login" className="nav__item">Login</Link>
+              <Link to="/login" className="nav__item" onClick={navToggle}>Login</Link>
             </li>
           </>
           )}

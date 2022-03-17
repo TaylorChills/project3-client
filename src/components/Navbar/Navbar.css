@@ -40,6 +40,8 @@ a {
 .nav__brand {
   text-transform: uppercase;
   color: white;
+  margin-top: 0;
+  margin-right: 10rem;
 }
 
 .nav__menu {

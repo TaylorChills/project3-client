@@ -81,7 +81,7 @@ function SignupPage() {
       </form>
 
       <p>Already have account?</p>
-      <Link to={"/login"} className="login-link"> Login</Link>
+      <Link to={"/login"} className="login-link">Login</Link>
     </div>
   )
 }

@@ -47,8 +47,6 @@ function EditGoalPage(props) {
         fetchGoals();
       }, []);
 
-    
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -103,8 +101,6 @@ function EditGoalPage(props) {
           </div>
 
           <div className='goals-radio' onChange={handleType}>
-            
-
               <div>
                 <input type="radio" id="daily" value='Daily'  name="type"/>
                 <label htmlFor="daily">Daily</label>
