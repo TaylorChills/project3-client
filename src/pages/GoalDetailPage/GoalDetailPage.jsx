@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../GoalDetailPage/GoalDetailPage.css'
 
@@ -14,15 +14,13 @@ import colors from "react-multi-date-picker/plugins/colors"
 function GoalDetails() {
 
     const [goal, setGoal] = useState(null)
-    const [value, setValues] = useState([
-        new Date(),
-        //new DateObject({ year: 2022, month: 3, day: 9 }),
-        // "March 09 2022",
-        // 1597994736000 //unix time in milliseconds (August 21 2020)
-      ])
+    const [value, setValues] = useState([])
+    const [isUpdated, setIsUpdated] = useState(false)
     //const [selectedDate, setSelectedDate] = useState(null)
 
     const {goalId} = useParams()
+
+    const navigate =useNavigate()
 
     const storedToken = localStorage.getItem("authToken");
 
@@ -30,6 +28,9 @@ function GoalDetails() {
         try {
             let response = await axios.get(`${process.env.REACT_APP_API_URL}/goals/${goalId}`, { headers: { Authorization: `Bearer ${storedToken}` }})
             setGoal(response.data)
+            setValues(response.data.dates)
+            
+         /*    setIsUpdated(true) */
         } catch (error) {
             console.log(error)
         }
@@ -41,8 +42,6 @@ function GoalDetails() {
 
 
     //Calendar stuff
-    /* const[dates, setDates] = useState(new Date()) */
-
 
     const completionSubmit = (e) => {
         e.preventDefault()
@@ -54,14 +53,13 @@ function GoalDetails() {
         axios
         .put(`${process.env.REACT_APP_API_URL}/goals/${goalId}/send-dates`, body, { headers: { Authorization: `Bearer ${storedToken}` }} )
         .then((response) => {
-          console.log(response)
+         /*  setIsUpdated(false) */
+         fetchGoal()
+         navigate(`/goal/${goalId}`)
         })
         .catch((err) => console.log(err))
 
-
-
     }
-
 
     function handleChange(selectedDates) {
         console.log('selecting dates')
@@ -78,42 +76,45 @@ function GoalDetails() {
         {goal && 
         <>
         <div >
-
             <h1 className='detail-title'>{goal.name}</h1>
-
             <div className='menu'>
-            <Link to={"/home"} className="button1">back</Link>
-            
-            <Link to={`/goal/edit/${goalId}`} className="button2">Edit Goal</Link>
+                <Link to={"/home"} className="button1">back</Link>
+                <Link to={`/goal/edit/${goalId}`} className="button2">Edit Goal</Link>
             </div>
-            
             <div className='calendar'>
-
-            <form onSubmit={completionSubmit}>
-
-                <Calendar 
-                className='calendar'
-                value={value}
-                onChange={(e) => handleChange(e)}
-                multiple
-                format="MM/DD/YYYY"
-                sort
-                plugins={[
-                    <DatePanel />
-                ]}
-                
-                // maxDate={new Date()}
-                // format="MM/DD/YYYY"
-                //     plugins={[
-                //     <DatePanel sort="date" />]}
-                />
-                
-                <button type='submit' className="submit">Make Changes</button>
-            </form>
+                <form onSubmit={completionSubmit}>
+                    <Calendar 
+                    maxDate={new Date()}
+                    className='calendar'
+                    value={value}
+                    onChange={(e) => handleChange(e)}
+                    multiple
+                    format="MM/DD/YYYY"
+                    sort
+                    plugins={[
+                        <DatePanel/>
+                    ]}
+                    
+                    // maxDate={new Date()}
+                    // format="MM/DD/YYYY"
+                    //     plugins={[
+                    //     <DatePanel sort="date" />]}
+                    />        
+                    <button type='submit' className="submit">Make Changes</button>
+                </form>
 
             </div>
             <p>{goal.description}</p>
             <p>{goal.type}</p>
+            <p>{goal.streak}</p>
+            {/* {goal.map((date) => {
+                return (
+                    <div>
+                    <p>{date.dates}</p>
+                    </div>
+                )
+            })} */}
+            
             </div>
         </>
         }

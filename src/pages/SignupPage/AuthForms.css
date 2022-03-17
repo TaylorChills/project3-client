@@ -85,6 +85,10 @@ font-family: 'Ubuntu', sans-serif;
     padding-top: 15px;
 }
 
+.login-link{
+    color: #9C27B0;
+}
+
 
 
 @media (max-width: 600px) {

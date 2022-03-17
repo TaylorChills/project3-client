@@ -66,6 +66,8 @@ function SignupPage() {
           placeholder="Password"
         />
 
+        <br />
+
       {/*   <label>Image:</label>
         <input type="file" name="imageUrl" accept="image/jpeg" onChange={(e) => setImageUrl(e.target.files[0])}/> */}
 
@@ -79,7 +81,7 @@ function SignupPage() {
       </form>
 
       <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <Link to={"/login"} className="login-link"> Login</Link>
     </div>
   )
 }

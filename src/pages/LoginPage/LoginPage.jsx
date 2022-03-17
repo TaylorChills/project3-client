@@ -53,6 +53,8 @@ function LoginPage() {
         placeholder="Password"
         />
 
+        <br />
+
         <button 
         type="submit"
         className="submit" 

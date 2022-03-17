@@ -115,6 +115,7 @@ function NewGoalPage(props) {
                 value={frequency}
                 onChange={handleFrequency}
                 className="often"
+                placeholder='/7'
                 max={7}
               />
           }
