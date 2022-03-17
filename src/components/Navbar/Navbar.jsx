@@ -37,27 +37,27 @@ function Navbar() {
       <ul className={active}>
         {loggedIn && (
           <>
-            <li className="nav__item">
-              <Link to="/home">Home Page</Link>
-            </li>
-
-            <li className="nav__item">
-              <Link to="/new-goal">New goal</Link>
+            <li>
+              <Link to="/home" className="nav__item">Home Page</Link>
             </li>
 
             <li>
-              <button onClick={logoutUser}>Logout</button>
+              <Link to="/new-goal" className="nav__item">New goal</Link>
+            </li>
+
+            <li>
+              <button onClick={logoutUser} className="nav__button">Logout</button>
             </li>
           </>
         )}
         {!loggedIn && (
           <>
-            <li className="nav__item">
-              <Link to="/signup">Sign Up</Link>
+            <li>
+              <Link to="/signup" className="nav__item">Sign Up</Link>
             </li>
 
-            <li className="nav__item">
-              <Link to="/login">Login</Link>
+            <li>
+              <Link to="/login" className="nav__item">Login</Link>
             </li>
           </>
           )}

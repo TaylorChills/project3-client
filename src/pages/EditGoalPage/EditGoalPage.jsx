@@ -1,4 +1,3 @@
-import '../NewGoalPage/NewGoalPage.css'
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -67,16 +66,18 @@ function EditGoalPage(props) {
 
   return (
     <div className='form'>
-
-    <h1>Edit Goal</h1>
-
+    <h1 className='edit-title'>Edit Goal</h1>
+      <div className='menu'>
+        <Link to={"/home"}  className='back'>back</Link>
+        <button onClick={deleteGoal}  className='delete'>Delete Goal</button>
+      </div>
     
 
       <form onSubmit={handleSubmit} id="goal-form">
         <div className='new-goal'>
-          <Link to={"/home"}>back</Link>
+          
           <div className='goals'>
-            <label>Goal Name:</label>  <br />
+            <h3>Goal Name</h3>  <br />
               <input 
                 type="text"
                 name="name"
@@ -87,7 +88,7 @@ function EditGoalPage(props) {
           </div>
 
           <div className='goals'>
-            <label>Description:</label> <br />
+            <h3>Description</h3> <br />
               <textarea
                 name="description"
                 value={description}
@@ -119,7 +120,7 @@ function EditGoalPage(props) {
           </div>
 
           <div className='goals'>
-            <label>How Often:</label> <br />
+            <h3>How Often</h3> <br />
             
               <input 
                 type="number"
@@ -143,7 +144,7 @@ function EditGoalPage(props) {
         </div>  
         <button type='submit'  className='submit'>Confirm Changes</button>   
       </form>
-      <button onClick={deleteGoal}  className='submit'>Delete Goal</button>
+      
     </div>
   )
 }
