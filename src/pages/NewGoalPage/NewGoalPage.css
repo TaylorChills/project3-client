@@ -3,7 +3,7 @@ label {
 }
 
 .edit-title{
-   padding-top: rem; 
+   padding-top: 1.5rem; 
 }
 
 .detail-title{
@@ -40,9 +40,13 @@ label {
 }
 
 .goals-radio {
-  display: flex;
+  display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
 
-  flex-direction: column;
+.radio{
+ margin-bottom: 1rem;
 }
 
 .un {

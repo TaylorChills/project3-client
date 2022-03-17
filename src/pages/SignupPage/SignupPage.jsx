@@ -5,34 +5,26 @@ import '../SignupPage/AuthForms.css'
 
 function SignupPage() {
   const [username, setUsername] = useState('');
+ /*  const [name, setName] = useState(''); */
   const [password, setPassword] = useState('');
 
-  const [imageUrl, setImageUrl] = useState('')
+  
 
   const navigate = useNavigate();
 
-  const handlePassword = (e) => setPassword(e.target.value);
   const handleUsername = (e) => setUsername(e.target.value);
+ /*  const handleName = (e) => setName(e.target.value); */
+  const handlePassword = (e) => setPassword(e.target.value);
 
-
-  const storedToken = localStorage.getItem("authToken");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Cloudinary
-    /* const uploadData = new FormData();
-    uploadData.append("file", imageUrl);
-
-    const upload = await axios.post(`${process.env.REACT_APP_API_URL}/upload`,uploadData, { headers: { Authorization: `Bearer ${storedToken}` } }
-    );
-
-    , imageUrl: upload.data.fileUrl */
+   
 
 
     const body = { username, password };
 
-    //cloudinary
 
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, body)
@@ -49,13 +41,23 @@ function SignupPage() {
 
         <input 
           type="text"
-          name="name"
+          name="username"
           value={username}
           onChange={handleUsername}
           className="un"
           placeholder='Username'
           
         />
+
+        {/* <input 
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleName}
+          className="un"
+          placeholder='Name'
+          
+        /> */}
         
         <input 
           type="password"

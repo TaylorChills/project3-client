@@ -25,9 +25,9 @@ function App() {
         <Route
         path='/home' 
         element={
-        <IsPrivate>    
+            
           <UserPage/>
-        </IsPrivate>  }/>
+          }/>
         
         <Route path='/new-goal' element={<NewGoalPage/>}/>
         <Route path='/goal/:goalId' element={<GoalDetails/>}/>

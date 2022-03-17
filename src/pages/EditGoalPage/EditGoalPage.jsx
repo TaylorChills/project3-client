@@ -62,6 +62,13 @@ function EditGoalPage(props) {
         .catch((err) => console.log(err))
     }
 
+    const [showWeekly, setShowWeekly] = useState(false)
+    
+
+    const toggle = () => {
+      setShowWeekly(!showWeekly)
+    }
+
   return (
     <div className='form'>
     <h1 className='edit-title'>Edit Goal</h1>
@@ -82,6 +89,7 @@ function EditGoalPage(props) {
                 value={name}
                 onChange={handleName}
                 className="un"
+                required
               />
           </div>
 
@@ -95,46 +103,47 @@ function EditGoalPage(props) {
                 className='un'
                 cols={20}
                 rows={5}
+                required
               >
               Description:              
               </textarea>
           </div>
 
           <div className='goals-radio' onChange={handleType}>
-              <div>
-                <input type="radio" id="daily" value='Daily'  name="type"/>
+            
+              <div className='radio'>
+                <input type="radio" id="daily" value='Daily'  name="type" required/>
                 <label htmlFor="daily">Daily</label>
-              </div>  
-              <div>
-                <input type="radio" id="weekly" value='Weekly' name="type"/>
-                <label htmlFor="weekly">Weekly</label>
+              </div> 
+
+              <div className='radio'>
+                <input type="radio" id="weekly" value='Weekly' name="type" required/>
+                <label htmlFor="weekly" onClick={toggle}>Weekly</label>
               </div>
-              <div>
-                <input type="radio" id="monthly" value='Monthly'  name="type"/>
-                <label htmlFor="monthly">Monthly</label>
+
+              <div className='radio'>
+                <input type="radio" id="monthly" value='Monthly'  name="type" required/>
+                <label htmlFor="monthly" onClick={toggle}>Monthly</label>
               </div>
           </div>
 
           <div className='goals'>
-            <h3>How Often</h3> <br />
-            
+
+          <br />
+
+          {showWeekly  &&
+            <>
+              <h3>How Often</h3>
               <input 
                 type="number"
                 name="weekly"
                 value={frequency}
                 onChange={handleFrequency}
                 className="often"
-              /> / 7 times a week
-
-              <br />
-
-              <input 
-                type="number"
-                name="monthly"
-                value={frequency}
-                onChange={handleFrequency}
-                className="often"
-              /> / 20 times a month
+                max={7}
+              />
+            </>  
+          }
           </div>
 
         </div>  

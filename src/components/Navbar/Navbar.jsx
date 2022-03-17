@@ -39,7 +39,7 @@ function Navbar() {
             </li>
 
             <li>
-              <button onClick={logoutUser} className="nav__button" >Logout</button>
+              <Link to="/login" onClick={logoutUser} className="nav__button" >Logout</Link>
             </li>
           </>
         )}

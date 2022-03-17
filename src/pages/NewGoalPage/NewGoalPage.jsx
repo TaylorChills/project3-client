@@ -19,7 +19,6 @@ function NewGoalPage(props) {
     const handleDescription = (e) => setDescription(e.target.value)
     const handleType = (e) => setType(e.target.value)
     const handleFrequency = (e) => setFrequency(e.target.value)
-    const handleStreak = (e) => setStreak(e.target.value)
 
     
 
@@ -36,20 +35,21 @@ function NewGoalPage(props) {
           navigate(`/home`)
         })
         .catch((err) => console.log(err))
+
     }
 
-    const [showWeekly, setShowWeekly] = useState(true)
-    const [showMonthly, setShowMonthly] = useState(false)
+    /* const [showDaily, setShowDaily] = useState(false) */
+    const [showWeekly, setShowWeekly] = useState(false)
+    
 
-    const toggleShowWeekly = () => {
+    const toggle = () => {
       setShowWeekly(!showWeekly)
     }
 
-    const toggleShowMonthly = () => {
+    
+   /*  const toggleShowMonthly = () => {
       setShowMonthly(!showMonthly)
-    }
-
-
+    } */
 
   return (
     <div className='form'>
@@ -71,6 +71,7 @@ function NewGoalPage(props) {
                 onChange={handleName}
                 className="un"
                 placeholder="Goal Name"
+                required
               />
           </div>
 
@@ -84,56 +85,59 @@ function NewGoalPage(props) {
                 cols={20}
                 rows={5}
                 placeholder="Description"
+                required
               >
               Description:              
               </textarea>
           </div>
 
           <div className='goals-radio' onChange={handleType}>
-            
+              <div className='radio'>
+                <input type="radio"  id="daily" value='Daily'  name="type" required/>
 
-              <div>
-                <input type="radio" id="daily" value='Daily'  name="type"/>
                 <label htmlFor="daily">Daily</label>
               </div>  
-              <div>
-                <input type="radio" id="weekly" value='Weekly' name="type" onClick={toggleShowWeekly}/>
-                <label htmlFor="weekly">Weekly</label>
+
+              <div className='radio'>
+                <input type="radio" id="weekly" value='Weekly' name="type" required/>
+                <label htmlFor="weekly" onClick={toggle}>Weekly</label>
               </div>
-              <div>
-                <input type="radio" id="monthly" value='Monthly'  name="type" onClick={toggleShowMonthly}/>
-                <label htmlFor="monthly">Monthly</label>
+
+              <div className='radio'>
+                <input type="radio" id="monthly" value='Monthly'  name="type" required/>
+
+                <label htmlFor="monthly" onClick={toggle}>Monthly</label>
               </div>
           </div>
 
           <div className='goals'>
 
-          {showWeekly &&
+          <br />
+
+          {showWeekly  &&
+            <>
+              <h3>How Often</h3>
               <input 
                 type="number"
                 name="weekly"
                 value={frequency}
                 onChange={handleFrequency}
                 className="often"
-                placeholder='/7'
-                max={7}
+                max={20}
               />
+            </>  
           }
-          {showMonthly &&
-              <input 
+          </div>
+         {/* {showMonthly &&} */}
+              {/* <input 
                 type="number"
                 name="monthly"
                 value={frequency}
                 onChange={handleFrequency}
                 className="often"
-                placeholder='/20'
+                placeholder='   /20'
                 max={20}
-              />
-              
-          }
-          
-          </div>
-
+              /> */}
         </div>  
         <button type='submit' className='submit'>Add Goal!</button>   
       </form>

@@ -1,26 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import Calendar from "react-calendar";
-import { toHaveDescription } from "@testing-library/jest-dom/dist/matchers";
+import { Link } from "react-router-dom";
 import "../UserPage/UserPage.css";
 
 function UserPage() {
   const [quotes, setQuotes] = useState(null);
   const [goals, setGoals] = useState([]);
+  /* const [user, setUser] = useState([]) */
 
-  /* for delete */
-
-  //Fetch Users and Goals? Should I only fetch one or both
+  const storedToken = localStorage.getItem("authToken");
 
   const fetchGoals = async () => {
     try {
-      const storedToken = localStorage.getItem("authToken");
-
       let response = await axios.get(`${process.env.REACT_APP_API_URL}/goals`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       });
-
       setGoals(response.data);
     } catch (error) {
       console.log(error);
@@ -48,10 +42,13 @@ function UserPage() {
     fetchQuotes();
   }, []);
 
+
+
+
   return (
     <div className="home-page">
       {/* Display users name here */}
-      <h1>Home Page</h1>
+      <h1 className="header">Your Goals</h1>
 
       {/* <Link to={"/new-goal"} className="submit">Add new Goal</Link> */}
       {/* User profile pic */}
@@ -80,8 +77,9 @@ function UserPage() {
                   </div>
 
                   <div className="goal-type">
-                    <p>Type: {goal.type} {goal.frequency}</p>
-                    <p>Streak: {goal.streak}</p>
+                    <p><b>Type</b>: {goal.type}</p>
+                    <p><b>Streak</b>: {goal.streak}</p>
+                    <p><b>Frequency</b>: {goal.frequency} days</p>
                   </div>
                 </div>
               </Link>
@@ -94,3 +92,16 @@ function UserPage() {
 }
 
 export default UserPage;
+
+
+   //Cloudinary
+/* 
+   const [imageUrl, setImageUrl] = useState('')
+
+    const uploadData = new FormData();
+    uploadData.append("file", imageUrl);
+
+    const upload = async () => await axios.post(`${process.env.REACT_APP_API_URL}/upload`,uploadData, { headers: { Authorization: `Bearer ${storedToken}` } }
+    );
+
+    , imageUrl: upload.data.fileUrl */
